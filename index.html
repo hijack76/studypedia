@@ -359,13 +359,14 @@
      const app = initializeApp(firebaseConfig);
      const db = getFirestore(app);
 
-     // --- CONFIGURATION ---
-     const CONFIG = {
-       carousel: {
-         totalImages: 16,
-         interval: 8000,
-         preloadCount: 5
-       },
+      // --- CONFIGURATION ---
+      const CONFIG = {
+        carousel: {
+          totalImages: 5,
+          startIndex: 5,
+          interval: 8000,
+          preloadCount: 5
+        },
        colors: {
          primary: '#1b5e20',
          secondary: '#ffc107',
@@ -378,33 +379,72 @@
      let selectedCourse = null, selectedSemester = null, selectedUnit = null;
      let navigationLock = false; // Prevent double-clicks
 
-     const bgContainer = document.getElementById('bg-container');
-     if (bgContainer) {
-       for (let i = 1; i <= CONFIG.carousel.totalImages; i++) {
-         const slide = document.createElement('div');
-         slide.className = 'bg-slide' + (i === 1 ? ' active' : '');
-         slide.style.backgroundImage = 'url("site images/hero-bg' + i + '.jpg")';
-         slide.setAttribute('aria-hidden', 'true');
-         bgContainer.appendChild(slide);
-       }
-       const slides = document.querySelectorAll('.bg-slide');
-       let currentSlide = 0;
-       // Preload only first few images
-       for (let i = 1; i <= Math.min(CONFIG.carousel.preloadCount, CONFIG.carousel.totalImages); i++) { 
-         new Image().src = 'site images/hero-bg' + i + '.jpg'; 
-       }
-       setInterval(() => {
-         slides[currentSlide].classList.remove('active');
-         currentSlide = (currentSlide + 1) % slides.length;
-         slides[currentSlide].classList.add('active');
-         // Preload upcoming image
-         const nextIndex = (currentSlide + 1) % slides.length;
-         if (!slides[nextIndex].dataset.loaded) {
-           new Image().src = 'site images/hero-bg' + (nextIndex + 1) + '.jpg';
-           slides[nextIndex].dataset.loaded = 'true';
-         }
-       }, CONFIG.carousel.interval);
-     }
+      const bgContainer = document.getElementById('bg-container');
+      if (bgContainer) {
+        // Add solid background first for immediate paint
+        bgContainer.style.backgroundColor = '#1b5e20';
+        
+        // ✅ FIX: Correct loop index calculation for active slide
+        const images = [5,6,7,8,9];
+        const slides = [];
+        
+        for (let i = 0; i < images.length; i++) {
+          const slide = document.createElement('div');
+          slide.className = 'bg-slide' + (i === 0 ? ' active' : '');
+          slide.setAttribute('aria-hidden', 'true');
+          slide.dataset.imageNum = images[i];
+          bgContainer.appendChild(slide);
+          slides.push(slide);
+        }
+        
+        let currentSlide = 0;
+        
+        // Progressive image loading function with cache busting for GitHub Pages
+        function loadSlideImage(slideIndex) {
+          const slide = slides[slideIndex];
+          if (slide.dataset.loaded === 'true') return;
+          
+          // ✅ FIX: Proper encoding for space in folder name
+          const imageUrl = `site%20images/hero-bg${slide.dataset.imageNum}.jpg?ver=20260425`;
+          const img = new Image();
+          
+          img.onload = function() {
+            slide.style.backgroundImage = `url(${imageUrl})`;
+            slide.dataset.loaded = 'true';
+          };
+          
+          img.onerror = function(e) {
+            console.log('Failed to load image:', imageUrl);
+            slide.style.backgroundColor = '#1b5e20';
+            slide.dataset.loaded = 'true';
+          };
+          
+          img.crossOrigin = "anonymous";
+          img.src = imageUrl;
+        }
+        
+        // Load first slide immediately
+        loadSlideImage(0);
+        
+        // Load remaining slides with delay
+        setTimeout(() => {
+          for (let i = 1; i < slides.length; i++) {
+            setTimeout(() => loadSlideImage(i), i * 400);
+          }
+        }, 800);
+        
+        // Carousel rotation
+        setInterval(() => {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
+          
+          // Preload next upcoming slide
+          const nextIndex = (currentSlide + 1) % slides.length;
+          loadSlideImage(nextIndex);
+          
+        }, CONFIG.carousel.interval);
+      }
 
     const returnBtn = document.getElementById("return-top-btn");
     if (returnBtn) {
@@ -854,7 +894,6 @@
               '</div>' +
             '</div>';
           }
-        }
         }
     };
   </script>
