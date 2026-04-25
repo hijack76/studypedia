@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -49,17 +49,22 @@
       border-bottom: 5px solid var(--kshs-yellow);
       position: sticky;
       top: 0;
-      z-index: 50;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      width: 100%;
     }
     .nav-link {
       color: white;
       font-weight: 600;
       transition: all 0.3s;
       text-transform: uppercase;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
       text-decoration: none;
       position: relative;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
+      white-space: nowrap;
     }
     .nav-link:hover { color: var(--kshs-yellow); }
     .nav-link.active { color: var(--kshs-yellow); }
@@ -161,12 +166,12 @@
   <div id="app" class="relative z-10 flex flex-col min-h-screen">
     
     <header>
-      <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-        <div class="flex items-center space-x-4">
-          <img src="https://kshs.ac.ug/images/kampala%20logo.png" alt="KSHS Logo" class="h-14 w-auto object-contain" onerror="this.onerror=null;this.src='https://kshs.ac.ug/images/kampala%20logo.png';">
-          <span class="text-white font-bold text-lg hidden sm:block">KSHS MAIN LIBRARY</span>
+      <div class="container mx-auto px-4 py-2 flex items-center justify-between">
+        <div class="flex items-center space-x-4 flex-shrink-0">
+          <img src="https://kshs.ac.ug/images/kampala%20logo.png" alt="KSHS Logo" class="h-11 w-auto object-contain">
+          <span class="text-white font-bold text-base hidden md:block">KSHS MAIN LIBRARY</span>
         </div>
-        <nav class="hidden lg:flex space-x-6">
+        <nav class="hidden lg:flex space-x-5 items-center">
           <a href="#" onclick="goToPage('home')" class="nav-link home-link">Home</a>
           <a href="#" onclick="goToPage('library-guide')" class="nav-link guide-link">Library Guide</a>
           <a href="https://kshs.ac.ug/programs#" target="_blank" rel="noopener noreferrer" class="nav-link courses-link">Courses</a>
@@ -204,9 +209,10 @@
 
      <main id="main-content" class="flex-grow flex items-center justify-center p-4 md:p-6 relative" role="main" aria-label="Main content">
        <div class="text-center text-white max-w-4xl px-2 md:px-4 z-10 w-full">
-         <img src="https://kshs.ac.ug/images/kampala%20logo.png" alt="KSHS Logo" class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto mb-6 object-contain border-4 border-white/20 rounded-xl" onerror="this.onerror=null;this.src='https://kshs.ac.ug/images/kampala%20logo.png';">
+         <img src="https://kshs.ac.ug/images/kampala%20logo.png" alt="KSHS Logo" class="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 mx-auto mb-6 object-contain border-4 border-white/20 rounded-xl">
         <h1 class="text-2xl sm:text-4xl md:text-6xl font-black mb-4 shadow-text leading-tight">Kampala School Of Health Sciences Main Library</h1>
-        <p class="text-lg md:text-2xl mb-8 shadow-text font-medium opacity-90">Knowledge for Excellence in Health Sciences</p>
+        <p class="text-lg md:text-2xl mb-8 shadow-text font-medium opacity-90">Promoting learner centred education by focusing on the changing needs of library users.
+</p>
         <div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
          <a href="http://studypedia.kshs.ac.ug" target="_blank" class="btn-secondary">Study Materials</a>
           <a href="http://192.168.42.172:8000" target="_blank" class="btn-secondary">Search Books (OPAC)</a>
@@ -228,10 +234,10 @@
       </div>
     </main>
 
-    <footer class="bg-[#1b5e20] text-white py-5 border-t-4 border-[#ffc107] mt-auto">
+    <footer class="bg-[#1b5e20] text-white py-4 border-t-4 border-[#ffc107] mt-auto w-full">
       <div class="max-w-6xl mx-auto px-6">
         <!-- Single row layout with icons -->
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
           
           <!-- Contact -->
           <div class="flex items-start gap-3">
@@ -275,14 +281,14 @@
         </div>
 
         <!-- Copyright -->
-        <div class="border-t border-white/10 mt-3 pt-2 text-center">
+        <div class="border-t border-white/10 mt-3 pt-3 text-center">
           <p class="text-xs text-gray-400">&copy; 2026 Kampala School of Health Sciences Main Library. All Rights Reserved.</p>
         </div>
       </div>
     </footer>
   </div>
 
-  <button id="return-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-green-800 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 z-50 opacity-0 invisible" style="opacity: 0; visibility: hidden;">
+  <button id="return-top-btn" aria-label="Return to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-8 right-8 bg-green-800 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 z-50 opacity-0 invisible">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
   </button>
 
@@ -385,7 +391,9 @@
        for (let i = 1; i <= CONFIG.carousel.totalImages; i++) {
          const slide = document.createElement('div');
          slide.className = 'bg-slide' + (i === 1 ? ' active' : '');
-         slide.style.backgroundImage = 'url("site images/hero-bg' + i + '.jpg")';
+        // Fix broken image 5 filename with extra space
+        const imgName = i === 5 ? 'hero-bg5 \.jpg' : `hero-bg${i}.jpg`;
+        slide.style.backgroundImage = `url("site images/${imgName}")`;
          slide.setAttribute('aria-hidden', 'true');
          bgContainer.appendChild(slide);
        }
@@ -393,16 +401,18 @@
        let currentSlide = 0;
        // Preload only first few images
        for (let i = 1; i <= Math.min(CONFIG.carousel.preloadCount, CONFIG.carousel.totalImages); i++) { 
-         new Image().src = 'site images/hero-bg' + i + '.jpg'; 
+         const preloadName = i === 5 ? 'hero-bg5 \.jpg' : `hero-bg${i}.jpg`;
+         new Image().src = `site images/${preloadName}`; 
        }
-       setInterval(() => {
+       window.carouselInterval = setInterval(() => {
          slides[currentSlide].classList.remove('active');
          currentSlide = (currentSlide + 1) % slides.length;
          slides[currentSlide].classList.add('active');
          // Preload upcoming image
          const nextIndex = (currentSlide + 1) % slides.length;
          if (!slides[nextIndex].dataset.loaded) {
-           new Image().src = 'site images/hero-bg' + (nextIndex + 1) + '.jpg';
+           const nextName = (nextIndex + 1) === 5 ? 'hero-bg5 \.jpg' : `hero-bg${nextIndex + 1}.jpg`;
+           new Image().src = `site images/${nextName}`;
            slides[nextIndex].dataset.loaded = 'true';
          }
        }, CONFIG.carousel.interval);
@@ -410,13 +420,19 @@
 
     const returnBtn = document.getElementById("return-top-btn");
     if (returnBtn) {
+      let scrollTimeout;
       window.addEventListener("scroll", () => {
-        if (window.pageYOffset > 300) {
-          returnBtn.style.opacity = "1";
-          returnBtn.style.visibility = "visible";
-        } else {
-          returnBtn.style.opacity = "0";
-          returnBtn.style.visibility = "hidden";
+        if (!scrollTimeout) {
+          scrollTimeout = setTimeout(() => {
+            scrollTimeout = null;
+            if (window.pageYOffset > 300) {
+              returnBtn.style.opacity = "1";
+              returnBtn.style.visibility = "visible";
+            } else {
+              returnBtn.style.opacity = "0";
+              returnBtn.style.visibility = "hidden";
+            }
+          }, 100);
         }
       });
     }
@@ -427,7 +443,7 @@
     };
 
     function renderBreadcrumb() {
-      let html = '<div class="breadcrumb"><button onclick="window.goToPage(\'courses\')">📚 Courses</button>';
+      let html = '<div class="breadcrumb"><button onclick="window.goToPage(\'courses\')">?? Courses</button>';
       if (selectedCourse) {
         const c = courses.find(x => x.id === selectedCourse);
         html += '<span>›</span><button onclick="window.goToPage(\'semesters\')">' + (c?.name || 'Course') + '</button>';
@@ -453,7 +469,7 @@
        if (displayCourses.length === 0) {
          main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 w-full max-w-5xl mx-auto text-left">' +
            '<div class="text-center mb-6">' +
-           '<h2 class="text-3xl font-bold text-green-900 mb-2">📚 Available Courses</h2>' +
+           '<h2 class="text-3xl font-bold text-green-900 mb-2">?? Available Courses</h2>' +
            '<p class="text-gray-600">Select a course to view semesters, course units, and study materials.</p>' +
            '</div>' +
            '<div class="mb-6">' +
@@ -473,26 +489,14 @@
            '<p>Loading courses from database...</p>' +
            '</div></div>';
          
-         // Attach search listener after rendering
-         setTimeout(() => {
-           const searchInput = document.getElementById('course-search');
-           if (searchInput) {
-             searchInput.addEventListener('input', (e) => {
-               const term = e.target.value.toLowerCase().trim();
-               const filtered = courses.filter(c => 
-                 (c.name || '').toLowerCase().includes(term) ||
-                 (c.code || '').toLowerCase().includes(term)
-               );
-               renderCoursesList(filtered);
-             });
-           }
-         }, 100);
+         // Clear existing timeout if exists
+         if (window.searchTimeout) clearTimeout(window.searchTimeout);
          
          return;
        }
        let html = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 w-full max-w-5xl mx-auto text-left">';
        html += '<div class="text-center mb-6">';
-       html += '<h2 class="text-3xl font-bold text-green-900 mb-2">📚 Available Courses</h2>';
+       html += '<h2 class="text-3xl font-bold text-green-900 mb-2">?? Available Courses</h2>';
        html += '<p class="text-gray-600">Select a course to view semesters, course units, and study materials.</p>';
        html += '</div>';
        html += '<div class="mb-6">';
@@ -505,28 +509,34 @@
                  'aria-label="View ' + (course.name || 'course') + ' details" ' +
                  'onclick="window.selectCourse(\'' + course.id + '\')" ' +
                  'onkeydown="if(event.key===\'Enter\') window.selectCourse(\'' + course.id + '\')">';
-         html += '<div class="course-icon">📖</div>';
+         html += '<div class="course-icon">??</div>';
          html += '<h3 class="font-bold text-gray-800 text-lg">' + (course.name || 'Unnamed Course') + '</h3>';
          if (course.code) html += '<p class="text-xs text-gray-500 mt-1">Code: ' + course.code + '</p>';
          if (course.description) html += '<p class="text-sm text-gray-600 mt-2 line-clamp-2">' + course.description + '</p>';
          html += '<div class="mt-3 flex items-center text-green-700 text-sm font-semibold">';
-         html += 'View Semesters →</div></div>';
+         html += 'View Semesters ?</div></div>';
        });
        html += '</div>';
-       html += '<div class="mt-6 text-center"><button onclick="window.goToPage(\'home\')" class="btn-primary">← Back to Home</button></div></div>';
+       html += '<div class="mt-6 text-center"><button onclick="window.goToPage(\'home\')" class="btn-primary">? Back to Home</button></div></div>';
        main.innerHTML = html;
        
-       // Attach search listener
+       // Attach search listener with debounce
        const searchInput = document.getElementById('course-search');
        if (searchInput) {
          searchInput.focus();
          searchInput.addEventListener('input', (e) => {
-           const term = e.target.value.toLowerCase().trim();
-           const filtered = courses.filter(c => 
-             (c.name || '').toLowerCase().includes(term) ||
-             (c.code || '').toLowerCase().includes(term)
-           );
-           renderCoursesList(filtered);
+           // Clear previous pending search
+           if (window.searchTimeout) clearTimeout(window.searchTimeout);
+           
+           // Debounce search for 200ms
+           window.searchTimeout = setTimeout(() => {
+             const term = e.target.value.toLowerCase().trim();
+             const filtered = courses.filter(c => 
+               (c.name || '').toLowerCase().includes(term) ||
+               (c.code || '').toLowerCase().includes(term)
+             );
+             renderCoursesList(filtered);
+           }, 200);
          });
        }
      }
@@ -620,25 +630,11 @@
           if (doc.description) html += '<div class="doc-desc">' + doc.description + '</div>';
           html += '</div>';
           if (filePath) {
-            html += '<div class="flex gap-2"><a href="' + filePath + '" target="_blank" class="btn-green">📖 Read</a><a href="' + filePath + '" download class="btn-green" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);">⬇️ Download</a></div>';
+            html += '<div class="flex gap-2"><a href="' + filePath + '" target="_blank" class="btn-green">?? Read</a><a href="' + filePath + '" download class="btn-green" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);">?? Download</a></div>';
            }
            html += '</div>';
          });
          html += '</div>';
-       }
-       
-       // Show empty state if no documents exist
-       if (documents.length === 0 && main.innerHTML.includes('Loading documents')) {
-         // Already showing loading, do nothing
-       } else if (documents.length === 0) {
-         html = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 md:p-8 w-full max-w-4xl mx-auto text-left">';
-         html += renderBreadcrumb();
-         html += '<h2 class="text-2xl font-bold text-green-900 mb-1">' + (unit?.name || 'Course Unit') + '</h2>';
-         html += '<p class="text-gray-600 mb-4">' + (course?.name || '') + ' › ' + (sem?.name || '') + '</p>';
-         html += '<div class="text-center py-12 text-gray-500">' +
-                 '<p class="text-lg">No documents available for this course unit yet.</p>' +
-                 '<p class="text-sm mt-2">Please check back later or contact your instructor.</p>' +
-                 '</div></div>';
        }
        
        main.innerHTML = html;
@@ -653,9 +649,16 @@
       } catch (err) {
         console.error('Error fetching courses:', err);
         const main = document.getElementById('main-content');
-        if (main) main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 w-full max-w-4xl mx-auto text-center"><h2 class="text-2xl font-bold text-red-600 mb-2">⚠️ Error</h2><p class="text-gray-600">' + err.message + '</p><button onclick="window.goToPage(\'courses\')" class="btn-primary mt-4">Retry</button></div>';
+        if (main) main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 w-full max-w-4xl mx-auto text-center"><h2 class="text-2xl font-bold text-red-600 mb-2">?? Error</h2><p class="text-gray-600">' + err.message + '</p><button onclick="window.goToPage(\'courses\')" class="btn-primary mt-4">Retry</button></div>';
       }
     }
+
+     // Auto release navigation lock after maximum timeout (prevents permanent freeze)
+     function releaseNavigationLock() {
+       setTimeout(() => {
+         navigationLock = false;
+       }, 10000);
+     }
 
      async function fetchSemesters() {
        try {
@@ -685,7 +688,6 @@
        } catch (err) {
          console.error('Error fetching semesters:', err);
          navigationLock = false; // Release lock on error too
-         // ... existing error UI
        }
      }
 
@@ -726,7 +728,7 @@
          const main = document.getElementById('main-content');
          if (main) {
            main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 w-full max-w-4xl mx-auto text-center">' +
-             '<h2 class="text-2xl font-bold text-red-600 mb-2">⚠️ Error Loading Course Units</h2>' +
+             '<h2 class="text-2xl font-bold text-red-600 mb-2">?? Error Loading Course Units</h2>' +
              '<p class="text-gray-600">' + err.message + '</p>' +
              '<p class="text-gray-500 text-sm mt-2">Expected structure:<br>' +
              '<code class="bg-gray-100 px-2 py-1 rounded">RESOURCES_STUDYPEDIA/{courseId}/semesters/{semesterId}/courseunits/{unitId}</code></p>' +
@@ -779,7 +781,7 @@
          const main = document.getElementById('main-content');
          if (main) {
            main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 w-full max-w-4xl mx-auto text-center">' +
-             '<h2 class="text-2xl font-bold text-red-600 mb-2">⚠️ Error Loading Documents</h2>' +
+             '<h2 class="text-2xl font-bold text-red-600 mb-2">?? Error Loading Documents</h2>' +
              '<p class="text-gray-600">' + err.message + '</p>' +
              '<p class="text-gray-500 text-sm mt-2">Expected structure:<br>' +
              '<code class="bg-gray-100 px-2 py-1 rounded">RESOURCES_STUDYPEDIA/{courseId}/semesters/{semesterId}/courseunits/{unitId}/documents/{docId}</code></p>' +
@@ -792,6 +794,7 @@
      window.selectCourse = (courseId) => {
        if (navigationLock) return;
        navigationLock = true;
+       releaseNavigationLock();
        selectedCourse = courseId;
        selectedSemester = null;
        selectedUnit = null;
@@ -800,6 +803,7 @@
      window.selectSemester = (semesterId) => {
        if (navigationLock) return;
        navigationLock = true;
+       releaseNavigationLock();
        selectedSemester = semesterId;
        selectedUnit = null;
        fetchCourseUnits();
@@ -807,6 +811,7 @@
      window.selectUnit = (unitId) => {
        if (navigationLock) return;
        navigationLock = true;
+       releaseNavigationLock();
        selectedUnit = unitId;
        fetchDocuments();
      };
@@ -825,8 +830,8 @@
         if (main) {
           main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 w-full max-w-6xl mx-auto text-left" style="height:85vh;">' +
             '<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-3">' +
-            '<h2 class="text-xl sm:text-2xl font-bold text-green-900">📚 Study Materials</h2>' +
-            '<button onclick="window.goToPage(\'home\')" class="btn-primary text-sm py-2 px-4">← Back to Home</button>' +
+            '<h2 class="text-xl sm:text-2xl font-bold text-green-900">?? Study Materials</h2>' +
+            '<button onclick="window.goToPage(\'home\')" class="btn-primary text-sm py-2 px-4">? Back to Home</button>' +
             '</div>' +
             '<iframe src="https://studypedia.kshs.ac.ug" class="w-full rounded-xl border-2 border-green-200" style="height: calc(85vh - 70px);"></iframe>' +
             '</div>';
@@ -835,18 +840,15 @@
       else if (page === 'semesters') { selectedSemester = null; selectedUnit = null; renderSemestersList(); }
       else if (page === 'units') { selectedUnit = null; renderUnitsList(); }
        else if (page === 'library-guide') {
-         const main = document.getElementById('main-content');
-         if (main) {
-           main.innerHTML = '<div class="bg-white/95 backdrop-blur-sm rounded-2xl p-4 w-full max-w-6xl mx-auto text-left" style="height:85vh;">' +
-             '<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-3">' +
-             '<h2 class="text-xl sm:text-2xl font-bold text-green-900">📚 Library Guide</h2>' +
-             '<button onclick="window.goToPage(\'home\')" class="btn-primary text-sm py-2 px-4">← Back to Home</button>' +
-             '</div>' +
-             '<iframe src="LIBRARY GUIDE.pdf" class="w-full rounded-xl border-2 border-green-200" style="height: calc(85vh - 70px);"></iframe>' +
-             '</div>';
-        }
+         window.open('LIBRARY GUIDE.pdf', '_self');
       }
     };
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', () => {
+      if (window.carouselInterval) clearInterval(window.carouselInterval);
+      if (window.searchTimeout) clearTimeout(window.searchTimeout);
+    });
   </script>
 </body>
 </html>
