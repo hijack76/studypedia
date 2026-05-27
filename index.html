@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kampala School of Health Sciences Main Library</title>
-  <link rel="preload" as="image" href="site images/hero-bg1.jpg">
+  <link rel="preload" as="image" href="site images/hero-bg2.webp">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   
@@ -393,7 +393,7 @@
          const slide = document.createElement('div');
          slide.className = 'bg-slide' + (i === 1 ? ' active' : '');
         // Fix broken image 5 filename with extra space
-        const imgName = i === 5 ? 'hero-bg5 \.jpg' : `hero-bg${i}.jpg`;
+        const imgName = i === 5 ? 'hero-bg5 \.webp' : `hero-bg${i}.webp`;
         slide.style.backgroundImage = `url("site images/${imgName}")`;
          slide.setAttribute('aria-hidden', 'true');
          bgContainer.appendChild(slide);
@@ -402,7 +402,7 @@
        let currentSlide = 0;
        // Preload only first few images
        for (let i = 1; i <= Math.min(CONFIG.carousel.preloadCount, CONFIG.carousel.totalImages); i++) { 
-         const preloadName = i === 5 ? 'hero-bg5 \.jpg' : `hero-bg${i}.jpg`;
+         const preloadName = i === 5 ? 'hero-bg5 \.webp' : `hero-bg${i}.webp`;
          new Image().src = `site images/${preloadName}`; 
        }
        window.carouselInterval = setInterval(() => {
@@ -412,7 +412,7 @@
          // Preload upcoming image
          const nextIndex = (currentSlide + 1) % slides.length;
          if (!slides[nextIndex].dataset.loaded) {
-           const nextName = (nextIndex + 1) === 5 ? 'hero-bg5 \.jpg' : `hero-bg${nextIndex + 1}.jpg`;
+           const nextName = (nextIndex + 1) === 5 ? 'hero-bg5 \.webp' : `hero-bg${nextIndex + 1}.webp`;
            new Image().src = `site images/${nextName}`;
            slides[nextIndex].dataset.loaded = 'true';
          }
